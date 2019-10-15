@@ -1,27 +1,26 @@
-# Adonis API application
+# Api de blog feita com AdonisJs 
 
-This is the boilerplate for creating an API server in AdonisJs, it comes pre-configured with.
-
-1. Bodyparser
-2. Authentication
-3. CORS
-4. Lucid ORM
-5. Migrations and seeds
+Api feita com [TDD (Test Driven Development)](https://www.devmedia.com.br/test-driven-development-tdd-simples-e-pratico/18533)
 
 ## Setup
 
-Use the adonis command to install the blueprint
+Primeiro instale as dependências:
 
 ```bash
-adonis new yardstick --api-only
+yarn install
 ```
 
-or manually clone the repo and then run `npm install`.
+Depois use o comando:
 
+```bash
+adonis test
+```
+
+Veja sé todos os teste passam.
 
 ### Migrations
 
-Run the following command to run startup migrations.
+Depois rode as migrations:
 
 ```js
 adonis migration:run
