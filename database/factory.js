@@ -20,3 +20,12 @@ Factory.blueprint('App/Models/User', (faker, i, data) => {
     ...data,
   };
 });
+
+Factory.blueprint('App/Models/Post', (faker, i, data) => {
+  return {
+    title: faker.sentence({ words: 7 }),
+    content: faker.paragraph(),
+    active: faker.bool(),
+    ...data,
+  };
+});

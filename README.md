@@ -25,3 +25,11 @@ Depois rode as migrations:
 ```js
 adonis migration:run
 ```
+
+#### Servidor
+
+Inicie o servidor com o comando:
+
+```bash
+adonis serve --dev
+```
