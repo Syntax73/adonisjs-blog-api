@@ -12,6 +12,10 @@ class Post extends Model {
     return this.belongsTo('App/Models/User', 'author_id');
   }
 
+  tags() {
+    return this.belongsToMany('App/Models/Tag');
+  }
+
   getThumbnailUrl({ thumbnail }) {
     return `${Env.get('APP_URL')}/files/${thumbnail}`;
   }

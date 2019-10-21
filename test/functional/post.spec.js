@@ -13,8 +13,9 @@ trait('Test/ApiClient');
 trait('DatabaseTransactions');
 trait('Auth/Client');
 
-test('it should be able to create posts', async ({ assert, client }) => {
+test('it should be able to create post', async ({ assert, client }) => {
   const user = await Factory.model('App/Models/User').create();
+  const tag = await Factory.model('App/Models/Tag').create();
 
   const response = await client
     .post('/posts')
@@ -25,6 +26,7 @@ test('it should be able to create posts', async ({ assert, client }) => {
       'content',
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris commodo bibendum ultrices. Aliquam laoreet, urna vitae luctus blandit, leo orci cursus dolor, at gravida lacus risus vitae diam.'
     )
+    .field('tags', [tag.id])
     .field('active', false)
     .attach('thumbnail', Helpers.tmpPath('test/thumb.jpg'))
     .end();

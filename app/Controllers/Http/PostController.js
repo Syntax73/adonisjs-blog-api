@@ -10,6 +10,9 @@ class PostController {
       .with('user', builder => {
         builder.select(['id', 'name', 'email']);
       })
+      .with('tags', builder => {
+        builder.select(['id', 'title']);
+      })
       .fetch();
     return posts;
   }
@@ -27,7 +30,13 @@ class PostController {
 
   // Cria post
   async store({ request, response }) {
-    const data = request.only(['author_id', 'title', 'content', 'active']);
+    const { tags, ...data } = request.only([
+      'author_id',
+      'title',
+      'content',
+      'active',
+      'tags',
+    ]);
 
     const thumbnail = request.file('thumbnail');
 
@@ -42,15 +51,25 @@ class PostController {
 
       data.thumbnail = thumbnail.fileName;
     }
-
     const post = await Post.create(data);
+
+    if (tags && tags.length > 0) {
+      await post.tags().attach(tags);
+      await post.load('tags');
+    }
 
     return response.status(201).json(post);
   }
 
   async update({ request, params }) {
     const post = await Post.find(params.id);
-    const data = request.only(['author_id', 'title', 'content', 'active']);
+    const { tags, ...data } = request.only([
+      'author_id',
+      'title',
+      'content',
+      'active',
+      'tags',
+    ]);
 
     const thumbnail = request.file('thumbnail');
 
@@ -69,6 +88,11 @@ class PostController {
     post.merge(data);
 
     await post.save();
+
+    if (tags && tags.length > 0) {
+      await post.tags().sync(tags);
+      await post.load('tags');
+    }
 
     return post;
   }

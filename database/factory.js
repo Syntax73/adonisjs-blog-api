@@ -29,3 +29,10 @@ Factory.blueprint('App/Models/Post', (faker, i, data) => {
     ...data,
   };
 });
+
+Factory.blueprint('App/Models/Tag', (faker, i, data) => {
+  return {
+    title: faker.word(),
+    ...data,
+  };
+});

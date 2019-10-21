@@ -25,4 +25,10 @@ Route.group(() => {
   Route.post('/posts', 'PostController.store').validator('Post');
   Route.put('/posts/:id', 'PostController.update').validator('Post');
   Route.delete('/posts/:id', 'PostController.destroy');
+
+  Route.post('/tags', 'TagController.store').validator('Tag');
+  Route.get('/tags', 'TagController.index');
+  Route.get('/tags/:id', 'TagController.show');
+  Route.put('/tags/:id', 'TagController.update').validator('Tag');
+  Route.delete('/tags/:id', 'TagController.destroy');
 }).middleware('auth');
