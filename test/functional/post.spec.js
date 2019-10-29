@@ -21,7 +21,7 @@ test('it should be able to create post', async ({ assert, client }) => {
     .post('/posts')
     .loginVia(user, 'jwt')
     .field('author_id', user.id)
-    .field('title', 'Aprendento AdonisJs')
+    .field('title', 'Aprendendo AdonisJs')
     .field(
       'content',
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris commodo bibendum ultrices. Aliquam laoreet, urna vitae luctus blandit, leo orci cursus dolor, at gravida lacus risus vitae diam.'
@@ -33,6 +33,8 @@ test('it should be able to create post', async ({ assert, client }) => {
 
   response.assertStatus(201);
   assert.exists(response.body.id);
+  assert.exists(response.body.thumbnail);
+  assert.exists(response.body.tags);
 });
 
 test('it should be able to list posts', async ({ assert, client }) => {
@@ -83,6 +85,7 @@ test('it should be able to update post', async ({ assert, client }) => {
 
   assert.equal(response.body.title, 'Atualizado');
   assert.exists(response.body.thumbnail);
+  assert.exists(response.body.tags);
 });
 
 test('it should be able to delete post', async ({ assert, client }) => {
